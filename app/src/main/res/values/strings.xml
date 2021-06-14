@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">KotlinTutorial</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="high_score_string">High score: %1$d</string>
+    <string name="score_string">Score: %1$d</string>
+    <string name="timer_string">Timer: %1$d</string>
+</resources>
