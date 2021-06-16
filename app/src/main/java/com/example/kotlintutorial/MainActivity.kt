@@ -1,5 +1,6 @@
 package com.example.kotlintutorial
 
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -21,6 +22,19 @@ class MainActivity : AppCompatActivity() {
         val initialTimerValue: Long = 15000
         var score = 0
         var isStarted = false
+
+        //Shared Preference (для сохранения кусков данных локально)
+        val sharedPrefs: SharedPreferences = this.getSharedPreferences("kotlin_tutorial", 0)
+        val editor = sharedPrefs.edit()
+        editor.putInt("high_score", 5)
+        editor.apply()
+
+        //Для чтения данных из локального хранилища
+        val highScoreSharedPrefs = sharedPrefs.getInt("high_score", 0)
+        val name = sharedPrefs.getString("name", "not found")
+        Log.d("debug", "onCreate: $highScoreSharedPrefs")
+        Log.d("debug", "onCreate: $name")
+
 
         //Инициализация элементов UI
         val timerTextView = this.findViewById<TextView>(R.id.timer_tv)

@@ -1,11 +1,8 @@
 package com.example.kotlintutorial
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.lifecycle.MutableLiveData
 
 class BlankFragment : Fragment() {
 
@@ -13,11 +10,11 @@ class BlankFragment : Fragment() {
         super.onCreate(savedInstanceState)
         context?.getString(R.string.high_score_string, 5)
 
-        val initialTimerValue: Long = 5000
+        val sharedPrefs: SharedPreferences? = activity?.getSharedPreferences("shared_prefs", 0)
+        val editor = sharedPrefs?.edit()
 
-        val liveDate = MutableLiveData<Int>()
-
-        liveDate.observe(viewLifecycleOwner, {})
+        editor?.putInt("high_score", 5)
+        editor?.apply()
 
 
     }
