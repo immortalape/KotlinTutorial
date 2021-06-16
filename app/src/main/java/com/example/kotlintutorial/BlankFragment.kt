@@ -13,6 +13,8 @@ class BlankFragment : Fragment() {
         super.onCreate(savedInstanceState)
         context?.getString(R.string.high_score_string, 5)
 
+        val initialTimerValue: Long = 5000
+
         val liveDate = MutableLiveData<Int>()
 
         liveDate.observe(viewLifecycleOwner, {})
