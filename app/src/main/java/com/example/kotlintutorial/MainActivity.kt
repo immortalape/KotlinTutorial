@@ -17,9 +17,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val initialTimerValue: Long = 5000
-        var isStarted = false
+        //Наши переменные
+        val initialTimerValue: Long = 15000
         var score = 0
+        var isStarted = false
 
         //Инициализация элементов UI
         val timerTextView = this.findViewById<TextView>(R.id.timer_tv)
@@ -29,11 +30,13 @@ class MainActivity : AppCompatActivity() {
         //Создание LiveData
         val liveData = MutableLiveData<Int>()
 
+        //Функция для расчета и вывода очков
         fun setScore() {
             score++
             scoreTextView.text = this.getString(R.string.score_string, score)
         }
 
+        //Функция для сброса таймера и очков в исходное положение
         fun resetGame() {
             score = 0
             scoreTextView.text = this.getString(R.string.score_string, score)
@@ -50,8 +53,6 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onFinish() {
-                    //Домашнее задание: показывать сообщение после завершения таймера
-                    // и вернуть таймер в исходное положение
                     Toast.makeText(
                         this@MainActivity,
                         "Поздравляю, вы набрали .. очков",
@@ -64,7 +65,6 @@ class MainActivity : AppCompatActivity() {
 
         //Обработка нажатия кнопок
         button.setOnClickListener {
-            //Домашнее задание: Запустить таймер при нажатии на кнопку
             if (!isStarted) {
                 countdownTimer.start()
                 isStarted = true
