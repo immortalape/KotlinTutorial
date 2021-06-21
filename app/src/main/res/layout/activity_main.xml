@@ -21,8 +21,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/score_string"
-        app:layout_constraintEnd_toStartOf="@+id/timer_tv"
-        app:layout_constraintStart_toEndOf="@+id/high_score_tv"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/tap_me_btn"
+        app:layout_constraintEnd_toEndOf="@+id/tap_me_btn"
+        app:layout_constraintStart_toStartOf="@+id/tap_me_btn"
         app:layout_constraintTop_toTopOf="@+id/high_score_tv" />
 
     <TextView
@@ -32,16 +34,16 @@
         android:layout_marginEnd="16dp"
         android:text="@string/timer_string"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/score_tv" />
+        app:layout_constraintTop_toTopOf="@+id/high_score_tv" />
 
     <Button
         android:id="@+id/tap_me_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="360dp"
+        android:layout_marginBottom="290dp"
         android:text="Tap me"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

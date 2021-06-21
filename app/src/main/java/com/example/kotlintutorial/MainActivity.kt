@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -18,31 +19,34 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //Инициализация элементов UI
+        val timerTextView = this.findViewById<TextView>(R.id.timer_tv)
+        val scoreTextView = this.findViewById<TextView>(R.id.score_tv)
+        val highScoreTextView = this.findViewById<TextView>(R.id.high_score_tv)
+        val button = this.findViewById<Button>(R.id.tap_me_btn)
+
+        val sharedPrefs = this.getSharedPreferences("kotlin_tutorial", 0)
+        val editor = sharedPrefs.edit()
+
+        val highScore = sharedPrefs.getInt("high_score", 0)
+        highScoreTextView.text = this.getString(R.string.high_score_string, highScore)
+
         //Наши переменные
         val initialTimerValue: Long = 15000
         var score = 0
         var isStarted = false
 
-        //Shared Preference (для сохранения кусков данных локально)
-        val sharedPrefs: SharedPreferences = this.getSharedPreferences("kotlin_tutorial", 0)
-        val editor = sharedPrefs.edit()
-        editor.putInt("high_score", 5)
-        editor.apply()
-
-        //Для чтения данных из локального хранилища
-        val highScoreSharedPrefs = sharedPrefs.getInt("high_score", 0)
-        val name = sharedPrefs.getString("name", "not found")
-        Log.d("debug", "onCreate: $highScoreSharedPrefs")
-        Log.d("debug", "onCreate: $name")
-
-
-        //Инициализация элементов UI
-        val timerTextView = this.findViewById<TextView>(R.id.timer_tv)
-        val scoreTextView = this.findViewById<TextView>(R.id.score_tv)
-        val button = this.findViewById<Button>(R.id.tap_me_btn)
-
         //Создание LiveData
         val liveData = MutableLiveData<Int>()
+
+        //Функция для сохранения топ очков
+        fun saveHighScore() {
+            if (score > highScore) {
+                editor.putInt("high_score", score)
+                editor.apply()
+                highScoreTextView.text = this.getString(R.string.high_score_string, score)
+            }
+        }
 
         //Функция для расчета и вывода очков
         fun setScore() {
@@ -73,6 +77,7 @@ class MainActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     )
                         .show()
+                    saveHighScore()
                     resetGame()
                 }
             }
@@ -87,7 +92,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         //Наблюдение LiveData
-        liveData.observe(this, { timerValue ->
+        liveData.observe(this, Observer { timerValue ->
             timerTextView.text =
                 this.getString(R.string.timer_string, timerValue / 1000)
         })

@@ -10,12 +10,6 @@ class BlankFragment : Fragment() {
         super.onCreate(savedInstanceState)
         context?.getString(R.string.high_score_string, 5)
 
-        val sharedPrefs: SharedPreferences? = activity?.getSharedPreferences("shared_prefs", 0)
-        val editor = sharedPrefs?.edit()
-
-        editor?.putInt("high_score", 5)
-        editor?.apply()
-
 
     }
 }
