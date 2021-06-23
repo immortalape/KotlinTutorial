@@ -28,4 +28,15 @@
         app:layout_constraintBottom_toBottomOf="@+id/test_vh_name"
         app:layout_constraintStart_toEndOf="@+id/test_vh_name"
         app:layout_constraintTop_toTopOf="@+id/test_vh_name" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_launcher_background" />
 </androidx.constraintlayout.widget.ConstraintLayout>
