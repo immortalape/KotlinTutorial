@@ -24,6 +24,11 @@ class TestRecyclerViewAdapter : RecyclerView.Adapter<TestViewHolder>() {
 
     override fun getItemCount(): Int = list.size
 
+    fun setData(list: List<ListModel>) {
+        this.list = list
+        notifyDataSetChanged()
+    }
+
     inner class TestViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val name = itemView.findViewById<TextView>(R.id.test_vh_name)
         private val age = itemView.findViewById<TextView>(R.id.test_vh_age)
@@ -32,10 +37,5 @@ class TestRecyclerViewAdapter : RecyclerView.Adapter<TestViewHolder>() {
             name.text = item.name
             age.text = item.age.toString()
         }
-    }
-
-    fun setData(list: List<ListModel>) {
-        this.list = list
-        notifyDataSetChanged()
     }
 }
